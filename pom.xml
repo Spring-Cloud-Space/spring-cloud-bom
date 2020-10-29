@@ -15,7 +15,7 @@
 
     <groupId>yulikexuan.spring.cloud</groupId>
     <artifactId>spring-cloud-bom</artifactId>
-    <version>2020.04.06</version>
+    <version>2020.04.07</version>
 
     <packaging>pom</packaging>
 
@@ -196,6 +196,7 @@
         <dependency>
             <groupId>org.awaitility</groupId>
             <artifactId>awaitility</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
