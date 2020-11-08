@@ -9,13 +9,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.4.RELEASE</version>
+        <version>2.3.5.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>yulikexuan.spring.cloud</groupId>
     <artifactId>spring-cloud-bom</artifactId>
-    <version>2020.04.11</version>
+    <version>2020.04-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -38,13 +38,22 @@
     </developers>
 
     <properties>
-        <java.version>14</java.version>
+        <java.version>15</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <mapstruct.version>1.4.1.Final</mapstruct.version>
+        <guava.version>30.0-jre</guava.version>
+        <commons.lang3.version>3.11</commons.lang3.version>
+        <hibernate-validator.version>6.1.6.Final</hibernate-validator.version>
+        <packagecloud-wagon.version>0.0.6</packagecloud-wagon.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
+        <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+        <docker.plugin.version>0.34.1</docker.plugin.version>
         <docker.image.prefix>sfgbeerworks</docker.image.prefix>
         <docker.image.name>${project.artifactId}</docker.image.name>
     </properties>
@@ -71,13 +80,13 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>30.0-jre</version>
+                <version>${guava.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.11</version>
+                <version>${commons.lang3.version}</version>
             </dependency>
 
             <dependency>
@@ -223,7 +232,7 @@
             <extension>
                 <groupId>io.packagecloud.maven.wagon</groupId>
                 <artifactId>maven-packagecloud-wagon</artifactId>
-                <version>0.0.6</version>
+                <version>${packagecloud-wagon.version}</version>
             </extension>
 
         </extensions>
@@ -250,7 +259,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <release>${java.version}</release>
                         <source>${maven.compiler.source}</source>
@@ -279,7 +288,7 @@
 
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M5</version>
+                    <version>${maven-surefire-plugin.version}</version>
                     <configuration>
                         <testFailureIgnore>false</testFailureIgnore>
                         <reuseForks>false</reuseForks>
@@ -300,7 +309,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.0.0-M5</version>
+                    <version>${maven-failsafe-plugin.version}</version>
                     <configuration>
                         <includes>
                             <include>**/*IT.java</include>
@@ -325,7 +334,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.0.0-M3</version>
+                    <version>${maven-enforcer-plugin.version}</version>
                     <executions>
                         <execution>
                             <id>enforce-versions</id>
@@ -338,7 +347,7 @@
                                         <version>[3.6.3,)</version>
                                     </requireMavenVersion>
                                     <requireJavaVersion>
-                                        <version>14</version>
+                                        <version>${java.version}</version>
                                     </requireJavaVersion>
                                     <requireReleaseDeps>
                                         <onlyWhenRelease>true</onlyWhenRelease>
@@ -397,7 +406,7 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.34.1</version>
+                <version>${docker.plugin.version}</version>
                 <configuration>
                     <verbose>true</verbose>
                     <images>
@@ -430,6 +439,11 @@
             <id>packagecloud.releases</id>
             <url>packagecloud+https://packagecloud.io/cloudlab/release</url>
         </repository>
+
+        <snapshotRepository>
+            <id>packagecloud.releases</id>
+            <url>packagecloud+https://packagecloud.io/cloudlab/release</url>
+        </snapshotRepository>
 
     </distributionManagement>
 
